@@ -1,37 +1,26 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.matchReader = void 0;
-var csvFileReader_1 = require("./csvFileReader");
 var utils_1 = require("./utils");
-var matchReader = /** @class */ (function (_super) {
-    __extends(matchReader, _super);
-    function matchReader() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var matchReader = /** @class */ (function () {
+    function matchReader(reader) {
+        this.reader = reader;
+        this.matchReaderData = [];
     }
-    matchReader.prototype.maprow = function (row) {
-        return [
-            utils_1.stringToDate(row[0]),
-            row[1],
-            row[2],
-            parseInt(row[3]),
-            parseInt(row[4]),
-            row[5],
-            row[6]
-        ];
+    matchReader.prototype.load = function () {
+        this.reader.read();
+        this.matchReaderData = this.reader.data.map(function (row) {
+            return [
+                utils_1.stringToDate(row[0]),
+                row[1],
+                row[2],
+                parseInt(row[3]),
+                parseInt(row[4]),
+                row[5],
+                row[6]
+            ];
+        });
     };
     return matchReader;
-}(csvFileReader_1.CsvFileReader));
+}());
 exports.matchReader = matchReader;

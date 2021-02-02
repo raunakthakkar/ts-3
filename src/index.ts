@@ -1,9 +1,11 @@
 // this is my index file for third project that is file reader
+import {CsvFileReader} from './csvFileReader'
 import {matchReader} from './matchReader'
 import {MatchResult} from './utils'
 
-let myFile= new matchReader("football.csv")// this is a very general code to read any file and extract 
-myFile.read()   //a 2 dimension array which initally contains string in each row 
+let myFile= new CsvFileReader("football.csv")// this is a very general code to read any file and extract 
+let MatchReader= new matchReader(myFile)   //a 2 dimension array which initally contains string in each row
+MatchReader.load()
 
 // counting how many times manu win the match
 let countManuWin=():number=>{
@@ -23,4 +25,4 @@ manuWins+=1
 }
 
 console.log(countManuWin())
-console.log(myFile.data[0][0])
+console.log(MatchReader.matchReaderData)

@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // this is my index file for third project that is file reader
+var csvFileReader_1 = require("./csvFileReader");
 var matchReader_1 = require("./matchReader");
 var utils_1 = require("./utils");
-var myFile = new matchReader_1.matchReader("football.csv"); // this is a very general code to read any file and extract 
-myFile.read(); //a 2 dimension array which initally contains string in each row 
+var myFile = new csvFileReader_1.CsvFileReader("football.csv"); // this is a very general code to read any file and extract 
+var MatchReader = new matchReader_1.matchReader(myFile); //a 2 dimension array which initally contains string in each row
+MatchReader.load();
 // counting how many times manu win the match
 var countManuWin = function () {
     var manuWins = 0;
@@ -23,4 +25,4 @@ var countManuWin = function () {
     return manuWins;
 };
 console.log(countManuWin());
-console.log(myFile.data[0][0]);
+console.log(MatchReader.matchReaderData);
